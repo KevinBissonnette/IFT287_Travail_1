@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar ns="" xmlns="http://relaxng.org/ns/structure/1.0" datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes">
+    <start>
+        <element name="MainBody">
+            <attribute name="bodyID">
+                <data type="integer"/>
+            </attribute>
+            <attribute name="bodyName">
+                <data type="NCName"/>
+            </attribute>
+            <element name="Systems">
+                <oneOrMore>
+                    <element name="System">
+                        <attribute name="id">
+                            <data type="integer"/>
+                        </attribute>
+                        <attribute name="name">
+                            <data type="NCName"/>
+                        </attribute>
+                        <attribute name="type">
+                            <data type="integer"/>
+                        </attribute>
+                        <oneOrMore>
+                            <element name="Flow">
+                                <attribute name="id">
+                                    <data type="integer"/>
+                                </attribute>
+                                <attribute name="name"/>
+                                <element name="Connectible">
+                                    <optional>
+                                        <oneOrMore>
+                                            <element name="Atrium">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                                <attribute name="volume">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </element>
+                                        </oneOrMore>
+                                        <oneOrMore>
+                                            <element name="Ventricle">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                                <attribute name="volume">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </element>
+                                        </oneOrMore>
+                                    </optional>
+                                    <zeroOrMore>
+                                        <element name="Artery">
+                                            <optional>
+                                                <attribute name="endRadius">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </optional>
+                                            <attribute name="id">
+                                                <data type="integer"/>
+                                            </attribute>
+                                            <attribute name="length">
+                                                <data type="decimal"/>
+                                            </attribute>
+                                            <attribute name="name"/>
+                                            <attribute name="startRadius">
+                                                <data type="decimal"/>
+                                            </attribute>
+                                        </element>
+                                    </zeroOrMore>
+                                    <choice>
+                                        <group>
+                                            <oneOrMore>
+                                                <choice>
+                                                    <element name="DigestiveTract">
+                                                        <attribute name="id">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="length">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="name"/>
+                                                        <attribute name="volume">
+                                                            <data type="decimal"/>
+                                                        </attribute>
+                                                    </element>
+                                                    <element name="DuodenumTract">
+                                                        <attribute name="id">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="length">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="name">
+                                                            <data type="NCName"/>
+                                                        </attribute>
+                                                        <attribute name="volume">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                    </element>
+                                                    <element name="StomachTract">
+                                                        <attribute name="id">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="length">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="name">
+                                                            <data type="NCName"/>
+                                                        </attribute>
+                                                        <attribute name="volume">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                    </element>
+                                                </choice>
+                                            </oneOrMore>
+                                            <element name="RectumTract">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="length">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name">
+                                                    <data type="NCName"/>
+                                                </attribute>
+                                                <attribute name="volume">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </element>
+                                            <element name="BiDuct">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                            </element>
+                                            <oneOrMore>
+                                                <choice>
+                                                    <element name="Duct">
+                                                        <attribute name="id">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="name"/>
+                                                    </element>
+                                                    <element name="DuctOverflowableJunction">
+                                                        <attribute name="id">
+                                                            <data type="integer"/>
+                                                        </attribute>
+                                                        <attribute name="name"/>
+                                                    </element>
+                                                </choice>
+                                            </oneOrMore>
+                                            <element name="DeversingDuct">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                            </element>
+                                            <element name="InnerGallbladder">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                            </element>
+                                        </group>
+                                        <zeroOrMore>
+                                            <element name="SalivaryDuct">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="length">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name"/>
+                                                <attribute name="volume">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                            </element>
+                                        </zeroOrMore>
+                                    </choice>
+                                    <zeroOrMore>
+                                        <element name="Vein">
+                                            <optional>
+                                                <attribute name="endRadius">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </optional>
+                                            <attribute name="id">
+                                                <data type="integer"/>
+                                            </attribute>
+                                            <attribute name="length">
+                                                <data type="integer"/>
+                                            </attribute>
+                                            <attribute name="name"/>
+                                            <attribute name="startRadius">
+                                                <data type="decimal"/>
+                                            </attribute>
+                                        </element>
+                                    </zeroOrMore>
+                                    <choice>
+                                        <group>
+                                            <element name="Nose">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <attribute name="name">
+                                                    <data type="NCName"/>
+                                                </attribute>
+                                            </element>
+                                            <oneOrMore>
+                                                <element name="AirConnectible">
+                                                    <attribute name="endRadius">
+                                                        <data type="decimal"/>
+                                                    </attribute>
+                                                    <attribute name="id">
+                                                        <data type="integer"/>
+                                                    </attribute>
+                                                    <attribute name="length">
+                                                        <data type="decimal"/>
+                                                    </attribute>
+                                                    <attribute name="name"/>
+                                                    <attribute name="startRadius">
+                                                        <data type="decimal"/>
+                                                    </attribute>
+                                                </element>
+                                            </oneOrMore>
+                                            <oneOrMore>
+                                                <element name="Alveoli">
+                                                    <attribute name="id">
+                                                        <data type="integer"/>
+                                                    </attribute>
+                                                    <attribute name="name"/>
+                                                    <attribute name="volume">
+                                                        <data type="integer"/>
+                                                    </attribute>
+                                                </element>
+                                            </oneOrMore>
+                                        </group>
+                                        <zeroOrMore>
+                                            <element name="Capillaries">
+                                                <attribute name="id">
+                                                    <data type="integer"/>
+                                                </attribute>
+                                                <optional>
+                                                    <attribute name="length">
+                                                        <data type="integer"/>
+                                                    </attribute>
+                                                </optional>
+                                                <attribute name="name"/>
+                                                <attribute name="volume">
+                                                    <data type="decimal"/>
+                                                </attribute>
+                                            </element>
+                                        </zeroOrMore>
+                                    </choice>
+                                </element>
+                                <element name="Connections">
+                                    <zeroOrMore>
+                                        <element name="Connection">
+                                            <attribute name="id">
+                                                <data type="integer"/>
+                                            </attribute>
+                                            <oneOrMore>
+                                                <element name="to">
+                                                    <attribute name="id">
+                                                        <data type="integer"/>
+                                                    </attribute>
+                                                </element>
+                                            </oneOrMore>
+                                        </element>
+                                    </zeroOrMore>
+                                </element>
+                            </element>
+                        </oneOrMore>
+                    </element>
+                </oneOrMore>
+            </element>
+            <element name="Organs">
+                <oneOrMore>
+                    <element name="Organ">
+                        <attribute name="id">
+                            <data type="integer"/>
+                        </attribute>
+                        <attribute name="name"/>
+                        <attribute name="systemID">
+                            <data type="integer"/>
+                        </attribute>
+                    </element>
+                </oneOrMore>
+            </element>
+        </element>
+    </start>
+</grammar>
