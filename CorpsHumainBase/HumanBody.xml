@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE MainBody SYSTEM "HumanBody.dtd">
+<!DOCTYPE MainBody SYSTEM "HumanBodyDTD.dtd">
 <MainBody bodyName="DrHouse" bodyID="1">
   <Systems>
     <!--Type for system are :
