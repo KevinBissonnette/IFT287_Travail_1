@@ -1,7 +1,16 @@
 package tp1;
 
+
 import java.io.*;
 import java.util.StringTokenizer;
+import javax.xml.parsers.*;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+import org.xml.sax.helpers.DefaultHandler;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+import java.io.IOException;
 
 public class Devoir1 {
 
@@ -12,90 +21,95 @@ public class Devoir1 {
     private static final String TYPE_JSON = "json";
 
     public static void main(String[] args) {
-        try
-        {
+        try {
             // Il est possible que vous ayez à déplacer la connexion ailleurs.
             // N'hésitez pas à le faire!
             BufferedReader reader = ouvrirFichier(args);
             String transaction = lireTransaction(reader);
-            while (!finTransaction(transaction))
-            {
+            while (!finTransaction(transaction)) {
                 executerTransaction(transaction);
                 transaction = lireTransaction(reader);
             }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
     private static String getExtensionFichier(String nomFichier) {
-        if(nomFichier.lastIndexOf(".") != -1 && nomFichier.lastIndexOf(".") != 0)
-            return nomFichier.substring(nomFichier.lastIndexOf(".")+1);
+        if (nomFichier.lastIndexOf(".") != -1 && nomFichier.lastIndexOf(".") != 0)
+            return nomFichier.substring(nomFichier.lastIndexOf(".") + 1);
         else return "";
     }
 
     /**
      * Decodage et traitement d'une transaction
      */
-    static void executerTransaction(String transaction) throws Exception, IFT287Exception
-    {
-        try
-        {
+    static void executerTransaction(String transaction) throws Exception, IFT287Exception {
+        try {
             System.out.print(transaction + " ");
             // Decoupage de la transaction en mots
             StringTokenizer tokenizer = new StringTokenizer(transaction, " ");
-            if (tokenizer.hasMoreTokens())
-            {
+            if (tokenizer.hasMoreTokens()) {
                 String mode = tokenizer.nextToken();
                 String nomFichier = readString(tokenizer);
                 String extension = getExtensionFichier(nomFichier);
 
-                if (mode.equals(CMD_IMPORTER)){
-                    if(extension.equals(TYPE_XML)){
+                if (mode.equals(CMD_IMPORTER)) {
+                    if (extension.equals(TYPE_XML)) {
                         System.out.println("Debut de l'importation du fichier XML " + nomFichier);
-                        // Votre code d'importation XML ici (Partie 2)
+
+                        SAXParserFactory factory = SAXParserFactory.newInstance();
+
+                        try {
+
+                            SAXParser saxParser = factory.newSAXParser();
+
+                            SAXImportXml handler = new SAXImportXml();
+                            saxParser.parse(nomFichier, handler);
+
+                        } catch (ParserConfigurationException | SAXException | IOException e) {
+                            e.printStackTrace();
+                        }
 
 
-                    }
-                    else if (extension.equals(TYPE_JSON)){
-                        System.out.println("Debut de l'importation du fichier JSON " + nomFichier);
-                        //Votre code d'importation JSON ici (Partie 4)
 
 
-                    }
-                    else {
-                        System.out.println("Le système ne supporte actuellement pas l'importation des fichiers au format " + extension);
-                    }
+                } else if (extension.equals(TYPE_JSON)) {
+                    System.out.println("Debut de l'importation du fichier JSON " + nomFichier);
+                    //Votre code d'importation JSON ici (Partie 4)
+
+
+                } else {
+                    System.out.println("Le système ne supporte actuellement pas l'importation des fichiers au format " + extension);
                 }
-                else if (mode.equals(CMD_EXPORTER)){
-                    if(extension.equals(TYPE_XML)){
-                        System.out.println("Debut de l'exportation vers le fichier XML " + nomFichier);
-                        // Votre code d'exportation XML ici (Partie 4)
+            } else if (mode.equals(CMD_EXPORTER)) {
+                if (extension.equals(TYPE_XML)) {
+                    System.out.println("Debut de l'exportation vers le fichier XML " + nomFichier);
+                    // Votre code d'exportation XML ici (Partie 4)
 
 
-                    }
-                    else if (extension.equals(TYPE_JSON)){
-                        System.out.println("Debut de l'exportation vers le fichier JSON " + nomFichier);
-                        //Votre code d'exportation JSON ici (Partie 3)
+                } else if (extension.equals(TYPE_JSON)) {
+                    System.out.println("Debut de l'exportation vers le fichier JSON " + nomFichier);
+                    //Votre code d'exportation JSON ici (Partie 3)
 
 
-                    }
-                    else {
-                        System.out.println("Le système ne supporte actuellement pas l'exportation vers les fichiers au format " + extension);
-                    }
+                } else {
+                    System.out.println("Le système ne supporte actuellement pas l'exportation vers les fichiers au format " + extension);
                 }
-                else{
-                    System.out.println("Commande inconnue, choisir entre 'importer' ou 'exporter'");
-                }
+            } else {
+                System.out.println("Commande inconnue, choisir entre 'importer' ou 'exporter'");
             }
         }
-        catch (Exception e)
-        {
-            System.out.println(" " + e.toString());
-        }
     }
+        catch(
+    Exception e)
+
+    {
+        System.out.println(" " + e.toString());
+    }
+
+}
 
 
     // ****************************************************************
