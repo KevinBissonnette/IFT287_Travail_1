@@ -63,7 +63,7 @@ public class Devoir1 {
                         // CODE PARTIE 2
                         //****************
                         SAXParserFactory factory = SAXParserFactory.newInstance();
-                        factory.setValidating(false);
+                        //factory.setValidating(false); // ca marche pas
 
                         try {
 

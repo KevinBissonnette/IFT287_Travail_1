@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<!DOCTYPE MainBody SYSTEM "HumanBody.dtd" >
 <MainBody bodyName="DrHouse" bodyID="1">
   <Systems>
     <!--Type for system are :
@@ -1334,3 +1333,4 @@
   <!--Organ Template
   <Organ name="" id="" systemID=""/>-->
 </MainBody>
+
