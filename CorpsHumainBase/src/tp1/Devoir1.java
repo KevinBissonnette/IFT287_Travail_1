@@ -58,10 +58,12 @@ public class Devoir1 {
                 if (mode.equals(CMD_IMPORTER)) {
                     if (extension.equals(TYPE_XML)) {
                         System.out.println("Debut de l'importation du fichier XML " + nomFichier);
+
                         //***************
                         // CODE PARTIE 2
                         //****************
                         SAXParserFactory factory = SAXParserFactory.newInstance();
+                        factory.setValidating(false);
 
                         try {
 

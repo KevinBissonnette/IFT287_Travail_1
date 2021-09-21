@@ -24,34 +24,36 @@ public class SAXImportXml extends DefaultHandler {
     }
 
     public void startElement(String uri, String localName,
-                             String qName, Attributes attributes) {
+                             String Organ, Attributes attributes) {
 
         // reset the tag value
         currentValue.setLength(0);
 
-        System.out.printf("Start Element : %s%n", qName);
+        System.out.printf("Start Element : %s%n", Organ);
 
-        if (qName.equalsIgnoreCase("staff")) {
+        if (Organ.equalsIgnoreCase("Heart")) {
             // get tag's attribute by name
-            String id = attributes.getValue("id");
-            System.out.printf("Staff id : %s%n", id);
+            String id = attributes.getValue("Artery");
+            System.out.printf("organ id : %s%n", id);
         }
-
+/*
         if (qName.equalsIgnoreCase("salary")) {
             // get tag's attribute by index, 0 = first attribute
             String currency = attributes.getValue(0);
             System.out.printf("Currency :%s%n", currency);
         }
+        */
+
     }
 
-    public void endElement(String uri, String localName,String qName) {
+    public void endElement(String uri, String localName,String Organ) {
 
-        System.out.printf("End Element : %s%n", qName);
+        System.out.printf("End Element : %s%n", Organ);
 
-        if (qName.equalsIgnoreCase("name")) {
-            System.out.printf("Name : %s%n", currentValue.toString());
+        if (Organ.equalsIgnoreCase("Hearth")) {
+            System.out.printf("Organ : %s%n", currentValue.toString());
         }
-
+/*
         if (qName.equalsIgnoreCase("role")) {
             System.out.printf("Role : %s%n", currentValue.toString());
         }
@@ -63,7 +65,7 @@ public class SAXImportXml extends DefaultHandler {
         if (qName.equalsIgnoreCase("bio")) {
             System.out.printf("Bio : %s%n", currentValue.toString());
         }
-
+*/
     }
 
     @Override
