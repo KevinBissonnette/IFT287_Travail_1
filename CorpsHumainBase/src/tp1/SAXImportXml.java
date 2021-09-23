@@ -77,7 +77,7 @@ public class SAXImportXml extends DefaultHandler {
             system.flow.get(FlowIndex-1).con.circulatoire.add(temp);
         }
 
-        if ( is(Organ,"AirConnectible") || is(Organ,"Alveoli")) {
+        if ( is(Organ,"AirConnectible") || is(Organ,"Alveoli") || is(Organ,"Nose") || is(Organ,"Nose") ) {
             var temp = new Tract();
             temp.tagName = Organ;
             temp.name = attributes.getValue("name");
@@ -85,6 +85,8 @@ public class SAXImportXml extends DefaultHandler {
             temp.volume = attributes.getValue("volume");
             system.flow.get(FlowIndex-1).con.pipe.add(temp);
         }
+
+
 
 
 
