@@ -1,8 +1,18 @@
 package tp1;
 
-public class Duct {
+public class Duct extends HasTag{
 
-    private String name;
+    public String name;
 
-    private long id;
+    public String id;
+
+
+
+    public String toString() {
+        return String.format("{\n" +
+                "  \"name\": %s, \n" +
+                "  \"id\": %s,\n" +
+                "}",name,id);
+
+    }
 }

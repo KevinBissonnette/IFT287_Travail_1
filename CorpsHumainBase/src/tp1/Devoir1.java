@@ -71,7 +71,7 @@ public class Devoir1 {
 
                             SAXImportXml handler = new SAXImportXml();
                             saxParser.parse(nomFichier, handler);
-
+                            System.out.println(handler.getSystem());
                         } catch (ParserConfigurationException | SAXException | IOException e) {
                             e.printStackTrace();
                         }

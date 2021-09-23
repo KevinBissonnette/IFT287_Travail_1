@@ -1,10 +1,19 @@
 package tp1;
 
-public class Tract {
+public class Tract extends HasTag{
 
-    private String name;
+    public String name;
 
-    private long length;
+    public String length;
 
-    private double volume;
+    public String volume;
+
+    public String toString() {
+        return String.format("{\n" +
+                "  \"name\": %s, \n" +
+                "  \"length\": %s,\n" +
+                "  \"volume\": %s\n" +
+                "}",name,length,volume);
+
+    }
 }

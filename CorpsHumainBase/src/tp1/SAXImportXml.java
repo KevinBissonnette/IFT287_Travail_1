@@ -4,23 +4,29 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 public class SAXImportXml extends DefaultHandler {
 
     private StringBuilder currentValue = new StringBuilder();
 
+    private HumanSystem system;
 
+    private List<HumanSystem> list = new ArrayList<>();
+
+    private int FlowIndex = 0;
 
     @Override
     public void startDocument() {
-        System.out.println("Start Document");
+       // System.out.println("Start Document");
 
     }
 
     @Override
     public void endDocument() {
-        System.out.println("End Document");
+      //  System.out.println("End Document");
     }
 
     public void startElement(String uri, String localName,
@@ -29,43 +35,77 @@ public class SAXImportXml extends DefaultHandler {
         // reset the tag value
         currentValue.setLength(0);
 
-        System.out.printf("Start Element : %s%n", Organ);
+       // System.out.printf("Start Element : %s%n", Organ);
+        if (Organ.equalsIgnoreCase("System")) {
+            system = new HumanSystem();
+            system.name = attributes.getValue("name");
+            system.id = attributes.getValue("id");
+            system.length = attributes.getValue("length");
+            system.volume = attributes.getValue("volume");
 
-        if (Organ.equalsIgnoreCase("Heart")) {
-            // get tag's attribute by name
-            String id = attributes.getValue("Artery");
-            System.out.printf("organ id : %s%n", id);
         }
-/*
-        if (qName.equalsIgnoreCase("salary")) {
-            // get tag's attribute by index, 0 = first attribute
-            String currency = attributes.getValue(0);
-            System.out.printf("Currency :%s%n", currency);
+
+        if (Organ.equalsIgnoreCase("Flow")) {
+            var temp = new Flow();
+
+            temp.name = attributes.getValue("name");
+            temp.id = attributes.getValue("id");
+            temp.con = new Connectible();
+            system.flow.add(temp);
+            FlowIndex++;
         }
-        */
+        if (Organ.equalsIgnoreCase("Connectible")) {
+        }
+
+        if ( is(Organ,"Ventricle") || is(Organ,"Atrium")) {
+            var temp = new Atrium_Ventricule_data();
+            temp.tagName = Organ;
+            temp.id = attributes.getValue("id");
+            temp.name = attributes.getValue("name");
+            temp.volume = attributes.getValue("volume");
+            system.flow.get(FlowIndex-1).con.coeur.add(temp);
+        }
+
+        if ( is(Organ,"Vein") || is(Organ,"Artery") || is(Organ,"Capillaries")) {
+            var temp = new Vein_Artery_data();
+            temp.tagName = Organ;
+            temp.name = attributes.getValue("name");
+            temp.id = attributes.getValue("id");
+            temp.startRadius = attributes.getValue("startRadius");
+            temp.endRadius = attributes.getValue("endRadius");
+            temp.length = attributes.getValue("length");
+            system.flow.get(FlowIndex-1).con.circulatoire.add(temp);
+        }
+
+        if ( is(Organ,"AirConnectible") || is(Organ,"Alveoli")) {
+            var temp = new Tract();
+            temp.tagName = Organ;
+            temp.name = attributes.getValue("name");
+            temp.length = attributes.getValue("length");
+            temp.volume = attributes.getValue("volume");
+            system.flow.get(FlowIndex-1).con.pipe.add(temp);
+        }
+
+
+
+
 
     }
 
     public void endElement(String uri, String localName,String Organ) {
 
-        System.out.printf("End Element : %s%n", Organ);
+       // System.out.printf("End Element : %s%n", Organ);
 
-        if (Organ.equalsIgnoreCase("Hearth")) {
-            System.out.printf("Organ : %s%n", currentValue.toString());
-        }
-/*
-        if (qName.equalsIgnoreCase("role")) {
-            System.out.printf("Role : %s%n", currentValue.toString());
-        }
+        if (Organ.equalsIgnoreCase("System")) {
+            list.add(system);
+            FlowIndex=0;
 
-        if (qName.equalsIgnoreCase("salary")) {
-            System.out.printf("Salary : %s%n", currentValue.toString());
         }
+    }
 
-        if (qName.equalsIgnoreCase("bio")) {
-            System.out.printf("Bio : %s%n", currentValue.toString());
-        }
-*/
+    public List<HumanSystem> getSystem() {
+
+        return list;
     }
 
     @Override
@@ -82,6 +122,11 @@ public class SAXImportXml extends DefaultHandler {
 
     }
 
+
+    private boolean is(String a, String b) {
+
+        return a.equalsIgnoreCase(b);
+    }
 
 
 }

@@ -1,14 +1,30 @@
 package tp1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class HumanSystem {
 
-    private String name;
+    public String name;
 
-    private long id;
+    public String id;
 
-    private int length;
+    public String length;
 
-    private double volume;
+    public String volume;
 
-    private Connectible con;
+    public List<Flow> flow = new ArrayList<>();
+
+
+
+    public String toString() {
+
+        return String.format("{\n" +
+                "  \"name\": %s, \n" +
+                "  \"id\": %s,\n" +
+                " \"volume\": %s, \n" +
+                " \"length\": %s, \n" +
+                "  \"flow\": %s\n" +
+                "}",name,id,volume,length,flow.toString());
+    }
 }

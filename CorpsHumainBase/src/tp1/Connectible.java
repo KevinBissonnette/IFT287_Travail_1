@@ -1,23 +1,34 @@
 package tp1;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Connectible {
 
-    private Vein_Artery_data vein;
-    private Vein_Artery_data artery;
-    private Vein_Artery_data airConnectible;
-    private Atrium_Ventricule_data atrium;
-    private Atrium_Ventricule_data ventricule;
-    private Atrium_Ventricule_data capillaries;
-    private Atrium_Ventricule_data alveoli;
-    private Tract stomachTract;
-    private Tract digestiveTract;
-    private Tract duodenumTract;
-    private Tract rectumTract;
-    private Duct duct;
-    private Duct biduct;
-    private Duct deversingDuct;
-    private Duct innerGallbladder;
-    private Duct ductOverflowableJunction;
-    private HumanSystem salivaryDuct;
-    private Organ organ;
+    public List<Vein_Artery_data> circulatoire= new ArrayList<>();
+    public List<Atrium_Ventricule_data> coeur = new ArrayList<>();
+    public List<Tract> pipe = new ArrayList<>();
+    public List<Duct> ventre = new ArrayList<>();
+
+    public HumanSystem salivaryDuct;
+    public Organ organ;
+
+    public String toString() {
+
+        List list = null;
+
+        if( circulatoire.size()>0)
+            list = circulatoire;
+        else if(coeur.size()>0)
+            list = coeur;
+        else if(pipe.size()>0)
+            list = pipe;
+        else if(ventre.size()>0)
+            list = ventre;
+        if(list != null)
+            return list.toString();
+
+        return null;
+    }
+
 }
